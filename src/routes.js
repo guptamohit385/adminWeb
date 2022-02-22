@@ -2,6 +2,7 @@ import Dashboard from "views/Dashboard.js";
 import Icons from "views/Icons.js";
 import UserPage from "views/User.js";
 import Product from "views/Product.js";
+import ProductList from "views/ProductList";
 import Category from "views/Category.js";
 import Banner from "views/Banner.js";
 import Login from "views/Login.js";
@@ -36,26 +37,33 @@ var routes = [
     layout: "/admin",
   },
   {
+    path: "/productlist",
+    name: "Product List",
+    icon: "nc-icon nc-album-2",
+    component: ProductList,
+    layout: "/admin",
+  },
+  {
     path: "/banner",
     name: "Banner",
     icon: "nc-icon nc-album-2",
     component: Banner,
     layout: "/admin",
   },
-  {
-    path: "/user",
-    name: "Profile",
-    icon: "nc-icon nc-user-run",
-    component: UserPage,
-    layout: "/admin",
-  },
-  {
-    pro: true,
-    path: "/#",
-    name: "Logout",
-    icon: "nc-icon nc-button-power",
-    component: UserPage,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/user",
+  //   name: "Profile",
+  //   icon: "nc-icon nc-user-run",
+  //   component: UserPage,
+  //   layout: "/admin",
+  // },
+  // {
+  //   pro: true,
+  //   path: "/#",
+  //   name: "Logout",
+  //   icon: "nc-icon nc-button-power",
+  //   component: UserPage,
+  //   layout: "/admin",
+  // },
 ];
 export default routes;

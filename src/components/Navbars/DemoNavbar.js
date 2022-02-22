@@ -1,5 +1,8 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
+
+import { connect } from 'react-redux';
+import { logout } from "redux/action";
 import {
   Collapse,
   Navbar,
@@ -25,6 +28,7 @@ function Header(props) {
   const [color, setColor] = React.useState("transparent");
   const sidebarToggle = React.useRef();
   const location = useLocation();
+  const history = useHistory();
   const toggle = () => {
     if (isOpen) {
       setColor("transparent");
@@ -70,6 +74,11 @@ function Header(props) {
       sidebarToggle.current.classList.toggle("toggled");
     }
   }, [location]);
+
+  const gotoAgentDashBoard = () =>{
+        history.push('/user/login');
+  }
+
   return (
     // add or remove classes depending if we are on full-screen-maps page or not
     <Navbar
@@ -132,7 +141,7 @@ function Header(props) {
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem tag="a">Profile</DropdownItem>
-                <DropdownItem tag="a">Logout</DropdownItem>
+                <DropdownItem tag="a" onClick={() =>props.logout(gotoAgentDashBoard)}>Logout</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </Nav>
@@ -142,4 +151,8 @@ function Header(props) {
   );
 }
 
-export default Header;
+const mapDispatchToProps = {
+  logout:logout
+}
+
+export default connect(null,mapDispatchToProps)(Header)

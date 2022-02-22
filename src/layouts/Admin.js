@@ -1,7 +1,8 @@
 import React from "react";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation , Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
 
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import Footer from "components/Footer/Footer.js";
@@ -16,22 +17,29 @@ function Dashboard(props) {
   const [activeColor, setActiveColor] = React.useState("info");
   const mainPanel = React.useRef();
   const location = useLocation();
-  React.useEffect(() => {
-    if (navigator.platform.indexOf("Win") > -1) {
-      ps = new PerfectScrollbar(mainPanel.current);
-      document.body.classList.toggle("perfect-scrollbar-on");
-    }
-    return function cleanup() {
-      if (navigator.platform.indexOf("Win") > -1) {
-        ps.destroy();
-        document.body.classList.toggle("perfect-scrollbar-on");
-      }
-    };
-  });
-  React.useEffect(() => {
-    mainPanel.current.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-  }, [location]);
+  // React.useEffect(() => {
+  //   if (navigator.platform.indexOf("Win") > -1) {
+  //     ps = new PerfectScrollbar(mainPanel.current);
+  //     document.body.classList.toggle("perfect-scrollbar-on");
+  //   }
+  //   return function cleanup() {
+  //     if (navigator.platform.indexOf("Win") > -1) {
+  //       ps.destroy();
+  //       document.body.classList.toggle("perfect-scrollbar-on");
+  //     }
+  //   };
+  // });
+  // React.useEffect(() => {
+  //   mainPanel.current.scrollTop = 0;
+  //   document.scrollingElement.scrollTop = 0;
+  // }, [location]);
+
+
+  console.log(props.token.token);
+
+  if(props.token.token === undefined)
+        return <Redirect to="/user/login" />
+
   return (
     <div className="wrapper">
       <Sidebar
@@ -59,4 +67,9 @@ function Dashboard(props) {
   );
 }
 
-export default Dashboard;
+const mapStateToProps =(state) =>{  
+    return {
+      token:state.login.token 
+  }
+}
+export default connect(mapStateToProps)(Dashboard);
