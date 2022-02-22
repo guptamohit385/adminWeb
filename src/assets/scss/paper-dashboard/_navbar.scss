@@ -23,9 +23,9 @@
       .input-group.no-border .form-control{
         color: $default-color;
 
-        @include placeholder(){
-          color: $default-color;
-        };
+        // @include placeholder(){
+        //   color: $default-color;
+        // };
       }
       .input-group-prepend .input-group-text i,
       .input-group-append .input-group-text i{
@@ -54,9 +54,9 @@
         .form-control{
           color: $default-color;
 
-          @include placeholder(){
-            color: $default-color;
-          };
+        //   @include placeholder(){
+        //     color: $default-color;
+        //   };
         }
       }
     }

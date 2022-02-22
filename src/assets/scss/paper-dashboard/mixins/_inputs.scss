@@ -21,11 +21,11 @@
    }
 }
 
-@mixin placeholder() {
-  &::-moz-placeholder {@content; } // Firefox
-  &:-ms-input-placeholder {@content; } // Internet Explorer 10+
-  &::-webkit-input-placeholder  {@content; } // Safari and Chrome
-}
+// @mixin placeholder() {
+//   &::-moz-placeholder {@content; } // Firefox
+//   &:-ms-input-placeholder {@content; } // Internet Explorer 10+
+//   &::-webkit-input-placeholder  {@content; } // Safari and Chrome
+// }
 
 @mixin light-form(){
     border-radius: 0;
