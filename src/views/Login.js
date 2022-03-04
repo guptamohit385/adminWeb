@@ -82,7 +82,7 @@ const handleValidation = () => {
     <Row>
       <Col md="4">
             <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
                 alt="login form"
             />
       </Col>

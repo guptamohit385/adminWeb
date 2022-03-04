@@ -1,6 +1,21 @@
-
-import React from "react";
-import { Card, CardHeader, CardBody, Row, Col,FormGroup, CardTitle, Form,Input, Button } from "reactstrap";
+import React, { useState,useEffect } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import { 
+  Card, 
+  CardHeader, 
+  CardBody, 
+  Row, 
+  Col,
+  FormGroup, 
+  CardTitle, 
+  Form,
+  Input, 
+  Button ,
+  Alert
+} from "reactstrap";
+import { baseUrl } from "config";
+import 'react-toastify/dist/ReactToastify.css';
 
 // const MapWrapper = () => {
 //   React.useEffect(() => {
@@ -13,6 +28,50 @@ import { Card, CardHeader, CardBody, Row, Col,FormGroup, CardTitle, Form,Input, 
 // };
 
 function Banner() {
+  const url2 = `${baseUrl}/categorys/search`;
+
+  const [allValues, setValues] = useState({
+    category: '',
+    subCategory: '',
+    order: '',
+    bannerImage: ''
+})
+
+
+const success = () => toast.success('Product Added Successfully!', {
+  position: "top-center",
+  autoClose: 2000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+});
+
+const failed = () => toast.error('Something Went Wrong Try Again', {
+  position: "top-center",
+  autoClose: 2000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+});
+
+const handleOnChange2 = (e) =>{
+  setValues({...allValues, [e.target.name] : e.target.files[0]});
+}
+
+const handleOnChange = (e) =>{
+  if(e.target.name === 'category'){
+      let filterItem = allValues.categoryTotalList.filter(  item => item.category === e.target.value)
+      console.log("filter Item", filterItem)
+      setValues({...allValues, [e.target.name] : e.target.value, subCategoryList : filterItem[0].subcategory });
+  }else{
+        setValues({...allValues, [e.target.name] : e.target.value});
+  }
+}
+
   return (
     <>
       <div className="content">
@@ -25,103 +84,65 @@ function Banner() {
               <CardBody>
                 <Form>
                   <Row>
-                    <Col className="pr-1" md="4">
+                  <Col className="pr-1" md="4">
                       <FormGroup>
-                        <label>Company Name</label>
-                        <Input
-                          defaultValue="1 Store "
-                          disabled
-                          placeholder="Company"
-                          type="text"
-                        />
+                        <label>Category</label>
+                        <Input 
+                            type="select" 
+                            name="category" 
+                            id="category"
+                            value={allValues.category}
+                            onChange={(e) =>handleOnChange(e)}
+                          >
+                          <option>Select Category</option>
+                          {
+                            allValues.categoryList.map((item ,index) =>(
+                                   <option key={index}>{item}</option>
+                            ))
+                          }
+                        </Input>
+                      </FormGroup>
+                    </Col>
+
+                    <Col className="pl-1" md="4">
+                      <FormGroup>
+                        <label>Sub Category</label>
+                        <Input 
+                            type="select" 
+                            name="subCategory" 
+                            id="subCategory"
+                            value={allValues.subCategory}
+                            onChange={(e) =>handleOnChange(e)}
+                        >
+                          <option>Select SubCategory</option>
+                          {
+                            allValues.subCategoryList.map((item ,index) =>(
+                                   <option key={index}>{item}</option>
+                            ))
+                          }
+                        </Input>
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
-                    <Col className="pr-1" md="4">
-                      <FormGroup>
-                        <label>Product Name</label>
-                        <Input
-                          placeholder="Ex: pencil"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
                     <Col className="pl-1" md="4">
                       <FormGroup>
-                        <label>Brand Name</label>
-                        <Input
-                          placeholder="Ex: sony"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-1" md="4">
-                      <FormGroup>
-                        <label>Product Category</label>
-                        <Input type="select" name="select" id="exampleSelect1">
-                        <option>Select</option>
-                        <option>Home Linen</option>
-                        <option>Uniform and Shoes</option>
-                        <option>Books & Stationery</option>
-                        <option>Premium Stationery</option>
-                        <option>Computer Hardware</option>
-                        <option>Beauty Products</option>
-                        <option>Clothing</option>
-                        <option>Sports</option>
-                        <option>Swiming Accessories</option>
-                      </Input>
-                        
+                        <label>Image Order</label>
+                        <Input placeholder="1,2,4" type="number" />
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
                     <Col md="12">
-                      <FormGroup>
-                        <label>Address</label>
+                    <FormGroup>
+                        <label>Gallery Images</label>
                         <Input
-                          defaultValue="Melbourne, Australia"
-                          placeholder="Home Address"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-1" md="4">
-                      <FormGroup>
-                        <label>City</label>
-                        <Input
-                          defaultValue="Melbourne"
-                          placeholder="City"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-1" md="4">
-                      <FormGroup>
-                        <label>Country</label>
-                        <Input
-                          defaultValue="Australia"
-                          placeholder="Country"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-1" md="4">
-                      <FormGroup>
-                        <label>Postal Code</label>
-                        <Input placeholder="ZIP Code" type="number" />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="12">
-                      <FormGroup>
-                        <label>About Me</label>
-                        <Input
-                          type="textarea"
-                          defaultValue="Oh so, your weak rhyme You doubt I'll bother, reading into it"
+                          placeholder="Banner Images"
+                          type="file"
+                          multiple
+                          name="bannerImage"
+                          // value={allValues.galleryImage}
+                          onChange={(e) =>handleOnChange2(e)}
                         />
                       </FormGroup>
                     </Col>

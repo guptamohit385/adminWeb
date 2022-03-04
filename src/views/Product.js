@@ -1,15 +1,3 @@
-// {
-// 	"category": "test", 
-// 	"subCategory": "test", 
-// 	"searchCategory": "test",
-// 	"productName": "test", 
-// 	"productDetails": "dygafsgdkhsjdfjsjas",
-// 	"ourPrice": 2300, 
-// 	"currency": "INR",
-// 	"marketPrice": 2800,
-// 	"coverImageUrl": "test",
-// 	"features": ["test"]
-// }
 import React, { useState,useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
@@ -27,7 +15,7 @@ import {
   Alert
 } from "reactstrap";
 import { baseUrl } from "config";
-import 'react-toastify/dist/ReactToastify.css';;
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Product() {
