@@ -1,6 +1,6 @@
 import React from "react";
 // javascript plugin used to create scrollbars on windows
-import PerfectScrollbar from "perfect-scrollbar";
+// import PerfectScrollbar from "perfect-scrollbar";
 import { Route, Switch, useLocation , Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 
@@ -35,7 +35,7 @@ function Dashboard(props) {
   // }, [location]);
 
 
-  console.log(props.token.token);
+  // console.log(props.token.token);
 
   if(props.token.token === undefined)
         return <Redirect to="/user/login" />

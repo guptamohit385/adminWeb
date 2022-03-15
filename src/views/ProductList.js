@@ -37,6 +37,7 @@ function ProductList() {
                     <tr>
                         {/* <th>#</th> */}
                         <th>Product Name</th>
+                        <th>Cover Image</th>
                         <th>Category</th>
                         <th>Our Price</th>
                         <th>Action</th>
@@ -51,6 +52,9 @@ function ProductList() {
                                 </th> */}
                                 <td>
                                     {item.productName}
+                                </td>
+                                <td>
+                                    <img src={item.coverImageUrl} style={{width: '50px', height: '60px'}} />
                                 </td>
                                 <td>
                                     {item.category}

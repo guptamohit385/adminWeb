@@ -75,7 +75,7 @@ const handleValidation = () => {
       return formIsValid;
   }
 
-  console.log(allValues);
+  // console.log(allValues);
 
   return (
     <div>

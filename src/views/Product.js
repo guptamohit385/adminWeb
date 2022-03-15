@@ -78,7 +78,7 @@ function Product() {
       const data = {
         category: allValues.category,
         subCategory: allValues.subCategory,
-        searchCategory: allValues.searchCategory,
+        searchCategory: allValues.category,
         productName: allValues.productName,
         productDetails: allValues.productDetails,
         currency: "INR",
@@ -98,11 +98,8 @@ function Product() {
                 const formData = new FormData();
                 formData.append('cover', allValues.coverImageUrl);
                 formData.append('gallery', allValues.galleryImage);
-          
                 const response2 = await axios.post(url3, formData);
-          
                 console.log("response2", response2)
-          
                 if( response2.status === 200)
                 { 
                         console.log("images uploaded successful")
@@ -115,8 +112,6 @@ function Product() {
                  failed()
       }
 }
-
-// const notify = () => toast("Wow so easy!")
 
 const success = () => toast.success('Product Added Successfully!', {
                             position: "top-center",
@@ -202,7 +197,7 @@ const failed = () => toast.error('Something Went Wrong Try Again', {
                         </Input>
                       </FormGroup>
                     </Col>
-                    <Col className="px-1" md="4">
+                    {/* <Col className="px-1" md="4">
                       <FormGroup>
                       <label>Search Category</label>
                       <Input 
@@ -217,6 +212,17 @@ const failed = () => toast.error('Something Went Wrong Try Again', {
                           <option>subcategory2</option>
                           <option>subcategory3</option>
                         </Input>
+                      </FormGroup>
+                    </Col> */}
+                    <Col className="px-1" md="4">
+                      <FormGroup>
+                        <label>Search Category</label>
+                        <Input 
+                            name="searchCategory" 
+                            id="searchCategory"
+                            value={allValues.category}
+                            disabled
+                        />
                       </FormGroup>
                     </Col>
                   </Row>
@@ -269,24 +275,6 @@ const failed = () => toast.error('Something Went Wrong Try Again', {
                         />
                       </FormGroup>
                     </Col>
-                    {/* <Col className="pr-1" md="4">
-                      <FormGroup>
-                        <label>Product Vendor</label>
-                        <Input
-                          placeholder="Ex: Sachin"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col> */}
-                    {/* <Col className="pr-1" md="4">
-                      <FormGroup>
-                        <label>Likes</label>
-                        <Input
-                          placeholder="Ex: 100"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col> */}
                   </Row>
                   <Row>
                     <Col md="12">
@@ -302,17 +290,6 @@ const failed = () => toast.error('Something Went Wrong Try Again', {
                       </FormGroup>
                     </Col>
                   </Row>
-                  {/* <Row>
-                    <Col md="12">
-                      <FormGroup>
-                        <label>Description</label>
-                        <Input
-                          type="textarea"
-                          defaultValue="Product Description..."
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row> */}
                   <Row>
                     <Col className="pr-1" md="6">
                       <FormGroup>
@@ -321,7 +298,6 @@ const failed = () => toast.error('Something Went Wrong Try Again', {
                           placeholder="Main Cover Page"
                           type="file"
                           name="coverImageUrl"
-                          // value={allValues.coverImageUrl}
                           onChange={(e) =>handleOnChange2(e)}
                         />
                       </FormGroup>
@@ -334,7 +310,6 @@ const failed = () => toast.error('Something Went Wrong Try Again', {
                           type="file"
                           multiple
                           name="galleryImage"
-                          // value={allValues.galleryImage}
                           onChange={(e) =>handleOnChange2(e)}
                         />
                       </FormGroup>
